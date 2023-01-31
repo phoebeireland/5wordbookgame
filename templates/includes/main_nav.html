@@ -1,0 +1,56 @@
+<div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item d-block d-md-none">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'home' %}" id="home-link">
+                Home
+            </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All Products
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
+                <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="urnsandcoffins-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Urns &amp; Coffins
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="urnsandcoffins-link">
+                <a href="{% url 'products' %}?category=urns" class="dropdown-item">Urns</a>
+                <a href="{% url 'products' %}?category=coffins" class="dropdown-item">Coffins</a>
+                <a href="{% url 'products' %}?category=miscellaneous" class="dropdown-item">Miscellaneous</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="flowersandtombstones-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Flowers &amp; Tombstones
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="flowersandtombstones-link">
+                <a href="{% url 'products' %}?category=flowers" class="dropdown-item">Flowers</a>
+                <a href="{% url 'products' %}?category=tombstones" class="dropdown-item">Tombstones</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="condolences-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Condolences
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="condolences-link">
+                <a href="{% url 'condolences' %}" class="dropdown-item">Offer Condolences</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="about-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More Info
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="about-link">
+                <a href="{% url 'about' %}" class="dropdown-item">About Us & Our Team</a>
+            </div>
+        </li>
+    </ul>
+</div>
