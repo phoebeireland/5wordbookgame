@@ -7,23 +7,13 @@
         </li>
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Products
+                Categories
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
-                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
-                <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
-            </div>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="urnsandcoffins-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Urns &amp; Coffins
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="urnsandcoffins-link">
-                <a href="{% url 'products' %}?category=urns" class="dropdown-item">Urns</a>
-                <a href="{% url 'products' %}?category=coffins" class="dropdown-item">Coffins</a>
-                <a href="{% url 'products' %}?category=miscellaneous" class="dropdown-item">Miscellaneous</a>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Books</a>
+                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">Movies</a>
+                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">TV Shows</a>
+                <a href="{% url 'products' %}" class="dropdown-item">All Categories</a>
             </div>
         </li>
         <li class="nav-item dropdown">
