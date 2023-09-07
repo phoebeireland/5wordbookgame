@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="5 Word Book Game">
+    <meta name="keywords" content="game, words, books, numbers, guess">
+    <meta name="author" content="5 Word Book Game">
+    <title>5 Word Book Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">  
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class= "container">
+        <!--This basic code for the overlay was taken from stack overflow (https://stackoverflow.com/questions/22837407/overlaying-a-transparent-div-which-when-clicked-disappears) and altered-->
+        <div class="row" id="overlay">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;" id="intro">
+                <div class="card-header"><h2>Welcome to 5 Word Book Game!</h2></div>
+                <div class="card-body">
+                  <h4 class="card-title">How to Play:</h4>
+                  <ul>
+                    <li>You will be presented 5 words that all describe one book.</li>
+                    <li>Type your guess of what the book is into the answer box.</li>
+                    <li>Earn points for correct guesses!</li>
+                </ul>
+                <br>
+                <h2>Click Here to Start Game!</h2>
+                </div>
+              </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">5 Word Book Game</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gameinstructions.html">How to Play</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class= "row" id= "game-name">
+            <div class="col-12 text-center">
+                <h1>5 Word Book Game</h1>
+            </div>
+        </div>
+         <!-- this will have the total score. this wil be fixed to the top of the screen. It'll have a solid colour background-->
+        <div class= "row" id= "total-money">
+            <div class="col-12 text-center bg-success">
+                <!--This was taken from Love Maths and altered-->
+				<h2 class="scores">$<span id="score">0</span></h2>
+            </div>
+        </div>
+        <!-- This was added from bootstrap to work as the answer box-->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="answer box" aria-label="answer box" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Submit Answer</button>
+            </div>
+          </div>
+        <div class = "row">
+            <div class="col-12">
+                <button class="btn btn-danger btn-lg" type="button" onclick="saveScore();" >Save Score</button>
+            </div>
+        </div>
+    </div>
+<script src="assets/js/script.js"></script>
+</body>
+</html>
