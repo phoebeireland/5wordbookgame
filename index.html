@@ -6,6 +6,89 @@
 </head>
 <body>
     <h1>5 Word Book Guessing Game</h1>
+    <div class="container">
+        <div class="row">
+            <div></div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">5 Word Book Game</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gameinstructions.html">How to Play</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row" id="game-name">
+            <div class="col-12 text-center">
+                <h1>5 Word Book Game</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card text-white bg-danger mb-3" style="max-width: 90rem;">
+                    <div class="card-header"><h2 id="form-header" class="text-center">Feedback Form</h2></div>
+                    <div class="card-body">
+                        <div class="col-12" id="info-form">
+                            <h5 id="form-blurb">If you'd like to submit an issue with the game, or simply suggest an improvement
+                                for our game, please let us know below.
+                            </h5>
+                            <form method="POST" action="https://formdump.codeinstitute.net/" id="contact-form">
+                                <h5 id="info-prompt">Your Info:</h5>
+                                <div class="mb-3">
+                                    <label for="from_name" class="form-label">Name:</label>
+                                    <input type="text" class="form-control" name="from_name" id="from_name" required>
+                                    <input type="text" name="to_name" value="Square Factory" id="to_name" hidden>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="reply_to" class="form-label">Email address:</label>
+                                    <input type="text" class="form-control" id="reply_to" name="reply_to"
+                                        placeholder="name@example.com" required>
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <h5 id="preference-prompt">Let us know what type of request you are sending:</h5>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" id="issue" name="radioform" value="issue" required>
+                                      Issue with game
+                                    </label>
+                                    <br>
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" id="improvement" name="radioform" value="improvement">
+                                        Suggest an improvement
+                                      </label>
+                                  </div>
+                                <h5 id="other-info-prompt">Query:</h5>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label"></label>
+                                    <textarea class="form-control" id="message" name="message" rows="3"
+                                        placeholder="Write your message for us here..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success" id="info-button"
+                                    value="Send Email">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
     <div id="game"></div>
 
     <script>
