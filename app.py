@@ -1,5 +1,8 @@
+from flask import Flask, render_template, request, jsonify
 import csv
 import random
+
+app = Flask(__name__)
 
 def load_books_from_csv(file_path):
     books = {'easy': [], 'medium': [], 'hard': []}
@@ -7,7 +10,8 @@ def load_books_from_csv(file_path):
         reader = csv.DictReader(csvfile)
         for row in reader:
             difficulty = row['Difficulty'].lower()
-            books[difficulty].append({'title': row['Book Title'], 'clue': row['Clue']})
+            alternate_answers = [answer.strip() for answer in row.get('Alternate Answers', '').split(',')]
+            books[difficulty].append({'title': row['Book Title'], 'clue': row['Clue'], 'alternate_answers': alternate_answers})
     return books
 
 def get_random_book(books, difficulty, selected_books):
@@ -20,49 +24,36 @@ def update_score(score, is_correct):
     else:
         return score
 
-def main():
-    score = 0
-    max_score = 5  # Define maximum score achievable
-    selected_books = set()
+def check_answer(user_guess, correct_answers):
+    user_guess_lower = user_guess.lower()
+    for answer in correct_answers:
+        if user_guess_lower == answer.lower():
+            return True
+    return False
 
-    # Load books from CSV
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/play', methods=['POST'])
+def play():
+    data = request.json
+    difficulty = data['difficulty']
+    selected_books = set(data['selected_books'])
     books = load_books_from_csv('books.csv')
+    max_score = 5
+    score = 0
+    responses = []
 
-    # Allow user to choose difficulty level
-    difficulty = input("Choose difficulty (easy/medium/hard): ").lower()
-
-    # Validate user input
-    while difficulty not in ['easy', 'medium', 'hard']:
-        print("Invalid difficulty level. Please choose again.")
-        difficulty = input("Choose difficulty (easy/medium/hard): ").lower()
-
-    # Main loop for the game
-    for _ in range(max_score):  # Play until the maximum score is reached
-        # Select a random book that hasn't been selected before
+    for _ in range(max_score):
         book = get_random_book(books, difficulty, selected_books)
         selected_books.add(book['title'])
-        
         book_title = book['title']
         clue = book['clue']
+        correct_answers = [book_title] + book['alternate_answers']
+        responses.append({'clue': clue, 'score': score})
 
-        # Display the clue to the user
-        print("Here's your clue:")
-        print(clue)
-
-        # Get user input
-        user_guess = input("Enter the name of the book: ")
-
-        # Check if the user's guess matches the correct book title
-        if user_guess.lower() == book_title.lower():
-            print("Congratulations! You guessed correctly.")
-            score = update_score(score, True)
-        else:
-            print(f"Sorry, the correct answer was: {book_title}")
-            score = update_score(score, False)
-
-        print(f"Current Score: {score}/{max_score}")
-
-    print("Game Over. Your final score:", score)
+    return jsonify(responses)
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
