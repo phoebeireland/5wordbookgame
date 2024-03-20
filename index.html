@@ -52,11 +52,16 @@
                 </div>
             </div>
         </nav>
+    
         <h1>Book Guessing Game</h1>
-        <div id="game"></div>
-        <script>
+    <div id="game">
+        <button id="start">Start Game</button>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <script>
         $(document).ready(function() {
-            $('#game').html('<button id="start">Start Game</button>');
+            var score = 0;
 
             $('#start').click(function() {
                 var difficulty = prompt("Choose difficulty (easy/medium/hard):");
@@ -65,16 +70,34 @@
                         type: "POST",
                         url: "/play",
                         contentType: "application/json",
-                        data: JSON.stringify({difficulty: difficulty, selected_books: []}),
+                        data: JSON.stringify({difficulty: difficulty}),
                         success: function(response) {
                             $('#game').html('');
-                            $.each(response, function(index, item) {
-                                $('#game').append('<div><p>Clue: ' + item.clue + '</p><p>Score: ' + item.score + '</p></div>');
-                            });
+                            score = 0; // Reset the score when starting a new game
+                            $('#game').append('<p>Score: <span id="score">' + score + '</span></p>');
+                            startGame(response);
                         }
                     });
                 }
             });
+
+            function startGame(response) {
+                var index = 0;
+                displayClue(response, index);
+            }
+
+            function displayClue(response, index) {
+                $('#game').append('<div><p>Clue: ' + response[index].clue + '</p></div>');
+                index++;
+                if (index < response.length) {
+                    setTimeout(function() {
+                        displayClue(response, index);
+                    }, 2000); // Adjust the delay between clues as needed (in milliseconds)
+                } else {
+                    score += 1; // Increase the score after displaying each clue
+                    $('#score').text(score);
+                }
+            }
         });
     </script>
 </body>
