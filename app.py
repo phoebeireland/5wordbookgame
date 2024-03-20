@@ -83,7 +83,7 @@ def index():
     return render_template('index.html')
 
 # Define route for playing the game
-@app.route('/play', methods=['POST'])
+@app.route('/play', methods=['GET', 'POST'])
 def play():
     data = request.json
     difficulty = data['difficulty']
