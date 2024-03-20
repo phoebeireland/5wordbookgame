@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+'''from flask import Flask, render_template, request, jsonify
 import csv
 import random
 
@@ -18,6 +18,7 @@ def get_random_book(books, difficulty, selected_books):
     available_books = [book for book in books[difficulty] if book['title'] not in selected_books]
     return random.choice(available_books)
 
+@app.route('/update_score', methods=['POST'])
 def update_score(score, is_correct):
     if is_correct:
         return score + 1
@@ -54,6 +55,65 @@ def play():
         responses.append({'clue': clue, 'score': score})
 
     return jsonify(responses)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+'''
+
+from flask import Flask, render_template, request, jsonify
+import csv
+import random
+
+app = Flask(__name__)
+
+# Load books from CSV file
+def load_books_from_csv(file_path):
+    books = {'easy': [], 'medium': [], 'hard': []}
+    with open(file_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            difficulty = row['Difficulty'].lower()
+            alternate_answers = [answer.strip() for answer in row.get('Alternate Answers', '').split(',')]
+            books[difficulty].append({'title': row['Book Title'], 'clue': row['Clue'], 'alternate_answers': alternate_answers})
+    return books
+
+# Define route to serve HTML page
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Define route for playing the game
+@app.route('/play', methods=['POST'])
+def play():
+    data = request.json
+    difficulty = data['difficulty']
+    books = load_books_from_csv('books.csv')
+    selected_books = set(data.get('selected_books', []))
+    max_score = 5
+    score = 0
+    responses = []
+
+    for _ in range(max_score):
+        book = get_random_book(books, difficulty, selected_books)
+        selected_books.add(book['title'])
+        book_title = book['title']
+        clue = book['clue']
+        responses.append({'clue': clue, 'score': score})
+
+    return jsonify(responses)
+
+@app.route('/update_score', methods=['POST'])
+def update_score():
+    global score
+    data = request.json
+    new_score = data.get('score')
+    score = new_score
+    return jsonify({'message': 'Score updated successfully'})
+
+# Load a random book from the specified difficulty
+def get_random_book(books, difficulty, selected_books):
+    available_books = [book for book in books[difficulty] if book['title'] not in selected_books]
+    return random.choice(available_books)
 
 if __name__ == "__main__":
     app.run(debug=True)
