@@ -18,11 +18,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">  
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <style>
+        body {
+            background-image: url('/static/images/mainbackground.jpg');
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div></div>
@@ -63,6 +68,33 @@
         $(document).ready(function() {
             var score = 0;
 
+            function startGame(response) {
+                var index = 0;
+                displayClue(response, index);
+            }
+
+            function displayClue(response, index) {
+                $('#game').append('<div><p>Clue: ' + response[index] + '</p></div>');
+                index++;
+                if (index < response.length) {
+                    setTimeout(function() {
+                        displayClue(response, index);
+                    }, 2000); // Adjust the delay between clues as needed (in milliseconds)
+                } else {
+                    score += 1; // Increase the score after displaying each clue
+                    $('#score').text(score);
+                    $.ajax({
+                        type: "POST",
+                        url: "/update_score", // Your Flask route for updating the score
+                        contentType: "application/json",
+                        data: JSON.stringify({score: score}),
+                        success: function(response) {
+                            // Handle success response if needed
+                        }
+                    });
+                }
+            }
+
             $('#start').click(function() {
                 var difficulty = prompt("Choose difficulty (easy/medium/hard):");
                 if (difficulty) {
@@ -80,25 +112,8 @@
                     });
                 }
             });
-
-            function startGame(response) {
-                var index = 0;
-                displayClue(response, index);
-            }
-
-            function displayClue(response, index) {
-                $('#game').append('<div><p>Clue: ' + response[index].clue + '</p></div>');
-                index++;
-                if (index < response.length) {
-                    setTimeout(function() {
-                        displayClue(response, index);
-                    }, 2000); // Adjust the delay between clues as needed (in milliseconds)
-                } else {
-                    score += 1; // Increase the score after displaying each clue
-                    $('#score').text(score);
-                }
-            }
         });
     </script>
+        
 </body>
 </html>
